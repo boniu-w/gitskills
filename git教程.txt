@@ -88,7 +88,10 @@ Git鼓励大量使用分支：
 
 删除分支：git branch -d <name>
 
-
+8.删除库中文件
+    git rm 
+9.查看库中文件列表
+    git ls-files
 
 
 
