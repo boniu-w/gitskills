@@ -93,5 +93,21 @@ Git鼓励大量使用分支：
 9.查看库中文件列表
     git ls-files
 
+---------------------
+如何解决failed to push some refs to git
+ 
 
+可以通过如下命令进行代码合并【注：pull=fetch+merge]
+git pull --rebase origin master
+
+以下两个命令与 上一个 等同
+git fetch origin
+ 
+git merge origin/master
+ -----------------------------------------------------------------------------
+2.push前先将远程repository修改pull下来
+
+$ git pull origin master
+
+$ git push -u origin master
 
