@@ -1,17 +1,27 @@
 hello git
 https://github.com/boniu-w/gitProject.git
 
-在新電腦上生成ssh
-ls -al ~/.ssh
-ssh-keygen -t rsa -C "github用户名"，按三次回车
+---------------在新電腦上生成ssh 私钥---------------
+# 列出 所有 .ssh文件
+ls -al ~/.ssh  
+
+# 运行命令
+ssh-keygen -t rsa -C "boniu-w@live.cn"  # 按三次回车
+
 cat ~/.ssh/id_rsa.pub生成新的SSH
 登陆github,点击头像-settings-new SSH,复制新生成的SSH
 
 echo "# gitProject" >> README.md
 git init
-git add README.md
+
+ // 添加所有更改 或某个更改
+git  add .    
+git add README.md         
+
 git commit -m "first commit"
-git remote add origin https://github.com/boniu-w/gitProject.git
+
+git remote add origin https://github.com/boniu-w/gitProject.git       #给git仓库 提供远程地址 关联远程库
+
 git push -u origin master
 
 0.安装完成后 进一步设置
@@ -92,7 +102,7 @@ Git鼓励大量使用分支：
 
 合并某分支到当前分支：git merge <name>
 
-删除分支：git branch -d <name>
+删除分支：git branch -D <name>
 
 8.删除库中文件
     git rm 
@@ -110,14 +120,76 @@ git pull --rebase origin master
 git fetch origin
  
 git merge origin/master
- -----------------------------------------------------------------------------
+
+ ---------------------------------------------------------------------
 2.push前先将远程repository修改pull下来
 
 $ git pull origin master
 
 $ git push -u origin master
--------------------------------------------------------------------------------
+
 -------------- 克隆github 项目-------------------------------------
 一、首先要在本地新建一个文件夹，作为本地仓库。例如：新建文件夹mydata 
 二、进入mydata文件件下，右击-git bush here 
 三、进入下面的界面，输入git init，将本地仓库初始化 
+
+-------------------------分支 等-------------------------------------------
+# 查看本地分支
+git branch
+ 
+# 查看本地与远程分支
+git branch -a
+ 
+# 切换分支
+git checkout branchName
+ 
+# 创建并切换分支
+git checkout -b newBranchName
+ 
+# 拉取远程分支代码
+git checkout remoteBranchName
+ 
+# 删除本地分支
+git branch -d branchName
+ 
+# 删除远程分支
+git push origin -d branchName
+
+-----------------------------------版本回退-----------------------------------
+
+git log
+
+# 回退到上个版本
+git reset -hard HEAD^
+
+# 回退到上上个版本
+git reset -hard HEAD^^
+
+# 回退到上100个版本
+git reset -hard HEAD~100
+
+# 回退到指定版本
+git reset -hard b863671 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
