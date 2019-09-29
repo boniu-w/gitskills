@@ -2,6 +2,8 @@
 hello git
 https://github.com/boniu-w/gitProject.git
 
+git 项目 最好在本地一个空文件夹中
+
 ---------------在新電腦上生成ssh 私钥---------------
 # 列出 所有 .ssh文件
 ls -al ~/.ssh  
