@@ -172,6 +172,10 @@ git reset -hard HEAD~100
 # 回退到指定版本
 git reset -hard b863671 
 
+-------------rebase 操作-------------
+
+git rebase --abort 放弃合并，回到rebase操作之前的状态，之前的提交的不会丢弃
+
 
 
 
