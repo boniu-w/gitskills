@@ -1,8 +1,5 @@
-----------------------------test------------------------------
 hello git
 https://github.com/boniu-w/gitProject.git
-
-git 项目 最好在本地一个空文件夹中
 
 ---------------在新電腦上生成ssh 私钥---------------
 # 列出 所有 .ssh文件
@@ -162,22 +159,35 @@ git push origin -d branchName
 
 git log
 
-# 回退到上个版本
-git reset -hard HEAD^
+  // push 之前
+  
+  ----------没有add ----------
+  
+  git checkout .
+  ---------- add 后----------
+  # 放弃所有缓存
+  git reset HEAD .
+  
+  # 放弃某个 文件
+  git reset HEAD filepathname 
+  
+  
+  ----------commit 后----------
+  # 回退到上个版本
+  git reset -hard HEAD^
 
-# 回退到上上个版本
-git reset -hard HEAD^^
+  # 回退到上上个版本
+  git reset -hard HEAD^^
 
-# 回退到上100个版本
-git reset -hard HEAD~100
+  # 回退到上100个版本
+  git reset -hard HEAD~100
 
-# 回退到指定版本
-git reset -hard b863671 
+  # 回退到指定版本
+  git reset -hard b863671 
 
--------------rebase 操作-------------
+  //  push 后
 
-git rebase --abort 放弃合并，回到rebase操作之前的状态，之前的提交的不会丢弃
-
+  git revert
 
 
 
