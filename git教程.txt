@@ -174,7 +174,7 @@ git log
   
   ----------commit 后----------
   # 回退到上个版本
-  git reset -hard HEAD^
+  git reset --hard HEAD^
 
   # 回退到上上个版本
   git reset -hard HEAD^^
@@ -191,9 +191,14 @@ git log
 
 
 
-
-
-
+------------项目关联多个 库------------
+	git remote add wg 仓库地址    // wg 对应 原来的origin 
+	
+	git remote -v  // 查看项目 关联的所有库
+	
+	提交时
+	git push wg master 
+								
 
 
 
