@@ -1,11 +1,14 @@
-hello git
-https://github.com/boniu-w/gitProject.git
+### 项目地址
+https://github.com/boniu-w/gitskills
 
----------------在新電腦上生成ssh 私钥---------------
-# 列出 所有 .ssh文件
+### 1. 在新電腦上生成ssh 私钥
+
+列出 所有 .ssh文件
+
 ls -al ~/.ssh  
 
-# 运行命令
+运行命令
+
 ssh-keygen -t rsa -C "boniu-w@live.cn"  # 按三次回车
 
 cat ~/.ssh/id_rsa.pub生成新的SSH
@@ -31,27 +34,35 @@ git push -u origin master
   git init
   会生成一个.git 的文件 表示这个文件夹 是一个 git可以管理的本地库
 
-1.要关联一个远程库，使用命令git remote add origin git@server-name:path/repo-name.git；
-关联后，使用命令git push -u origin master第一次推送master分支的所有内容；
+1. 要关联一个远程库，使用命令
+
+>   git remote add origin git@server-name:path/repo-name.git；
+
+
+关联后，使用命令
+
+> git push -u origin master
+
+第一次推送master分支的所有内容；
 此后，每次本地提交后，只要有必要，就可以使用命令git push origin master推送最新修改；
-  分布式版本系统的最大好处之一是在本地工作完全不需要考虑远程库的存在，也就是有没有联网都可以正常
+分布式版本系统的最大好处之一是在本地工作完全不需要考虑远程库的存在，也就是有没有联网都可以正常
 工作，而SVN在没有联网的时候是拒绝干活的！当有网络的时候，再把本地提交推送一下就完成了同步，
 真是太方便了！
 
-2.要克隆一个仓库，首先必须知道仓库的地址，然后使用git clone命令克隆。
-Git支持多种协议，包括https，但通过ssh支持的原生git协议速度最快。
+2. 要克隆一个仓库，首先必须知道仓库的地址，然后使用git clone命令克隆。
+   Git支持多种协议，包括https，但通过ssh支持的原生git协议速度最快。
 
-3.提交一个项目到GitHub
-  比如在gitskills文件夹下 这是我在GitHub上clone的repository,cd到这个文件夹下,右键打开bash,出现命令
-窗口,执行git语句
-		git add README.md
-		git commit -m "first commit"
-		git remote add origin https://github.com/boniu-w/gitProject.git
-		git push -u origin master
-		
-    就可以了
-	第三条 命令 再第一次执行过以后 就可以省略掉了 因为 在此文件夹下的.git文件中已保存了 地址
-	第四条命令中的 -u 也可以省略掉了
+3. 提交一个项目到GitHub
+   比如在gitskills文件夹下 这是我在GitHub上clone的repository,cd到这个文件夹下,右键打开bash,出现命令
+   窗口,执行git语句
+   		git add README.md
+   		git commit -m "first commit"
+   		git remote add origin https://github.com/boniu-w/gitProject.git
+   		git push -u origin master
+
+   就可以了
+   第三条 命令 再第一次执行过以后 就可以省略掉了 因为 在此文件夹下的.git文件中已保存了 地址
+   第四条命令中的 -u 也可以省略掉了
 
 4.git log --pretty=online
 查看历史记录
@@ -69,22 +80,22 @@ Git支持多种协议，包括https，但通过ssh支持的原生git协议速度
 6.现在切换回master
 
   git checkout master
-  
+
   切换回master分支后，再查看一个readme.txt文件，刚才添加的内容不见了！
   因为那个提交是在dev分支上，而master分支此刻的提交点并没有变
   现在，我们把dev分支的工作成果合并到master分支上
-  
+
   git merge dev
-  
+
   git merge命令用于合并指定分支到当前分支。合并后，再查看readme.txt的内容，
   就可以看到，和dev分支的最新提交是完全一样的。
   注意到上面的Fast-forward信息，Git告诉我们，这次合并是“快进模式”，也就是
   直接把master指向dev的当前提交，所以合并速度非常快
   当然，也不是每次合并都能Fast-forward，我们后面会讲其他方式的合并。
   合并完成后，就可以放心地删除dev分支了
-  
+
   git branch -d dev
-  
+
   删除后，查看branch，就只剩下master分支了：
   git branch
   因为创建、合并和删除分支非常快，所以Git鼓励你使用分支完成某个任务，合并后再删掉分支，
@@ -100,7 +111,7 @@ Git鼓励大量使用分支：
 
 创建+切换分支：git checkout -b <name>
 
-合并某分支到当前分支：git merge <name>
+合并某分支到当前分支：git merge <name>  // name: 其他分支名
 
 删除分支：git branch -D <name>
 
@@ -110,18 +121,17 @@ Git鼓励大量使用分支：
     git ls-files
 
 ---------------------
-如何解决failed to push some refs to git
- 
+### 如何解决failed to push some refs to git
 
 可以通过如下命令进行代码合并【注：pull=fetch+merge]
 git pull --rebase origin master
 
 以下两个命令与 上一个 等同
 git fetch origin
- 
+
 git merge origin/master
 
- ---------------------------------------------------------------------
+---------------------------------------------------------------------
 2.push前先将远程repository修改pull下来
 
 $ git pull origin master
@@ -133,56 +143,72 @@ $ git push -u origin master
 二、进入mydata文件件下，右击-git bush here 
 三、进入下面的界面，输入git init，将本地仓库初始化 
 
--------------------------分支 等-------------------------------------------
-# 查看本地分支
+## 分支 等
+
+1. 查看本地分支
+
 git branch
- 
-# 查看本地与远程分支
+
+2. 查看本地与远程分支
+
 git branch -a
- 
-# 切换分支
+
+3. 切换分支
+
 git checkout branchName
- 
-# 创建并切换分支
+
+4. 创建并切换分支
+
 git checkout -b newBranchName
- 
-# 拉取远程分支代码
+
+5. 拉取远程分支代码
+
 git checkout remoteBranchName
- 
-# 删除本地分支
+
+6. 删除本地分支
+
 git branch -d branchName
- 
-# 删除远程分支
+
+7. 删除远程分支
+
 git push origin -d branchName
 
------------------------------------版本回退-----------------------------------
+## 版本回退
 
 git log
 
   // push 之前
-  
+
   ----------没有add ----------
-  
+
   git checkout .
   ---------- add 后----------
-  # 放弃所有缓存
+
+放弃所有缓存
+
   git reset HEAD .
-  
-  # 放弃某个 文件
+
+放弃某个 文件
+
   git reset HEAD filepathname 
-  
-  
+
+
   ----------commit 后----------
-  # 回退到上个版本
+
+回退到上个版本
+
   git reset --hard HEAD^
 
-  # 回退到上上个版本
+回退到上上个版本
+
   git reset -hard HEAD^^
 
-  # 回退到上100个版本
+回退到上100个版本
+
   git reset -hard HEAD~100
 
-  # 回退到指定版本
+回退到指定版本
+
   git reset -hard b863671 
 
   //  push 后
@@ -191,14 +217,15 @@ git log
 
 
 
-------------项目关联多个 库------------
-	git remote add wg 仓库地址    // wg 对应 原来的origin 
-	
+## 项目关联多个 库
+​	git remote add wg 仓库地址    // wg 对应 原来的origin 
+​	
+
 	git remote -v  // 查看项目 关联的所有库
 	
 	提交时
 	git push wg master 
-								
+
 
 
 
