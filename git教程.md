@@ -27,14 +27,14 @@ git remote add origin https://github.com/boniu-w/gitProject.git       #给git仓
 
 git push -u origin master
 
-0.安装完成后 进一步设置
-  git config --global user.name "Your Name"
-  git config --global user.email "email@example.com"
-  之后,在一个空的文件夹下输入
-  git init
-  会生成一个.git 的文件 表示这个文件夹 是一个 git可以管理的本地库
+1. 安装完成后 进一步设置
+     git config --global user.name "Your Name"
+     git config --global user.email "email@example.com"
+     之后,在一个空的文件夹下输入
+     git init
+     会生成一个.git 的文件 表示这个文件夹 是一个 git可以管理的本地库
 
-1. 要关联一个远程库，使用命令
+2. 要关联一个远程库，使用命令
 
 >   git remote add origin git@server-name:path/repo-name.git；
 
@@ -49,35 +49,34 @@ git push -u origin master
 工作，而SVN在没有联网的时候是拒绝干活的！当有网络的时候，再把本地提交推送一下就完成了同步，
 真是太方便了！
 
-2. 要克隆一个仓库，首先必须知道仓库的地址，然后使用git clone命令克隆。
+3. 要克隆一个仓库，首先必须知道仓库的地址，然后使用git clone命令克隆。
    Git支持多种协议，包括https，但通过ssh支持的原生git协议速度最快。
 
-3. 提交一个项目到GitHub
-   比如在gitskills文件夹下 这是我在GitHub上clone的repository,cd到这个文件夹下,右键打开bash,出现命令
-   窗口,执行git语句
-   		git add README.md
-   		git commit -m "first commit"
-   		git remote add origin https://github.com/boniu-w/gitProject.git
-   		git push -u origin master
+提交一个项目到GitHub
+比如在gitskills文件夹下 这是我在GitHub上clone的repository,cd到这个文件夹下,右键打开bash,出现命令
+窗口,执行git语句
+		git add README.md
+		git commit -m "first commit"
+		git remote add origin https://github.com/boniu-w/gitProject.git
+		git push -u origin master
 
-   就可以了
-   第三条 命令 再第一次执行过以后 就可以省略掉了 因为 在此文件夹下的.git文件中已保存了 地址
-   第四条命令中的 -u 也可以省略掉了
+就可以了
+第三条 命令 再第一次执行过以后 就可以省略掉了 因为 在此文件夹下的.git文件中已保存了 地址
+第四条命令中的 -u 也可以省略掉了
 
-4.git log --pretty=online
-查看历史记录
-5.创建分支
-  git checkout -b dev
-  -b参数表示创建并切换，相当于以下两条命令：
-  git branch dev
-  git checkout dev
-  查看当前分支,git branch命令会列出所有分支，当前分支前面会标一个*号
-  git branch
-  然后，我们就可以在dev分支上正常提交
-  git add test1.txt 
-  git commit -m "branch test"
-
-6.现在切换回master
+4. git log --pretty=online
+   查看历史记录
+5. 创建分支
+     git checkout -b dev
+     -b参数表示创建并切换，相当于以下两条命令：
+     git branch dev
+     git checkout dev
+     查看当前分支,git branch命令会列出所有分支，当前分支前面会标一个*号
+     git branch
+     然后，我们就可以在dev分支上正常提交
+     git add test1.txt 
+     git commit -m "branch test"
+6. 现在切换回master
 
   git checkout master
 
@@ -94,14 +93,15 @@ git push -u origin master
   当然，也不是每次合并都能Fast-forward，我们后面会讲其他方式的合并。
   合并完成后，就可以放心地删除dev分支了
 
-  git branch -d dev
+  git branch -D dev
 
   删除后，查看branch，就只剩下master分支了：
   git branch
   因为创建、合并和删除分支非常快，所以Git鼓励你使用分支完成某个任务，合并后再删掉分支，
   这和直接在master分支上工作效果是一样的，但过程更安全
-7.小结
-Git鼓励大量使用分支：
+
+7. 小结
+   Git鼓励大量使用分支：
 
 查看分支：git branch
 
@@ -115,33 +115,28 @@ Git鼓励大量使用分支：
 
 删除分支：git branch -D <name>
 
-8.删除库中文件
-    git rm 
-9.查看库中文件列表
-    git ls-files
+8. 删除库中文件
+       git rm 
+9. 查看库中文件列表
+       git ls-files
 
 ---------------------
+### 代码冲突
+
 ### 如何解决failed to push some refs to git
 
 可以通过如下命令进行代码合并【注：pull=fetch+merge]
 git pull --rebase origin master
 
-以下两个命令与 上一个 等同
-git fetch origin
 
-git merge origin/master
 
----------------------------------------------------------------------
-2.push前先将远程repository修改pull下来
+  在使用git的过程中经常需要使用到git pull命令，在更新远端代码的同时如果与本地代码产生冲突了，
 
-$ git pull origin master
+那么冲突的文件中就出现了需要手动合并的部分，而git pull --rebase不同的地方则是当有这些冲突存在时，
 
-$ git push -u origin master
+git帮我们自动创建了一个新的分支，并且git告诉你接下来你要在这个新的分支上处理这个冲突，
 
--------------- 克隆github 项目-------------------------------------
-一、首先要在本地新建一个文件夹，作为本地仓库。例如：新建文件夹mydata 
-二、进入mydata文件件下，右击-git bush here 
-三、进入下面的界面，输入git init，将本地仓库初始化 
+---
 
 ## 分支 等
 
