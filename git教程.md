@@ -229,7 +229,28 @@ git log
 
 
 
+### git 的一个bug
 
+```java
+error: RPC failed; curl 18 transfer closed with outstanding read data remaining
+fatal: The remote end hung up unexpectedly
+fatal: 过早的文件结束符（EOF）
+fatal: index-pack 失败
+```
+
+解决:
+
+究其原因是因为curl的postBuffer的默认值太小，我们需要调整它的大小，在终端重新配置大小,在这里，把postBuffer的值配置成500M是不够用的,我设成了2G 才好
+
+```java
+ git config --global http.postBuffer 524288000
+```
+
+这样已经配置好了，如果你不确定，可以根据以下命令查看postBuffer。
+
+   git config --list
+
+---
 
 
 
