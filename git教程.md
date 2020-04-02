@@ -230,11 +230,9 @@ git log
 
 
 
-#### git 回滚
+#### git 如果操作失误,错误的使用 git reset --hard 回滚
 
- 如果操作失误,错误的使用 git reset --hard 回滚,使得工作目录改变了,可以使用
-
-git reflog,看到相应的快照,可以回滚回去.
+ 使得工作目录改变了,可以使用git reflog,看到相应的快照,可以回滚回去.
 
 ```java
 git reset --hard 分支名  // 让本地代码与分支代码保持一致
@@ -265,9 +263,54 @@ fatal: index-pack 失败
 
 
 
+#### github 下载单个文件夹
+
+```java
+git remote add -f origin 仓库地址
+git config core.sparseCheckout true
+echo "单个文件夹" >> .git/info/sparse-checkout
+git pull origin master    
+```
 
 
 
+#### git中Already up to date 问题
+
+- 这个问题的原因是当前分支的代码与master分支代码不同步
+
+  - 解决方法:
+
+    ```java
+    git checkout .  // 放弃本地缓存
+    ```
+
+    
+
+### git 各种命令解释
+
+1. git add .  // 缓存本地代码
+
+2. git commit -m "comment"  // 提交本地代码到本地仓库
+
+3. git push origin master  // 推送本地库的代码到远程库
+
+4. git diff  // 此命令比较的是工作目录(Working tree)和暂存区域快照(index)之间的差异
+
+   也就是修改之后还没有暂存起来的变化内容
+
+5. git diff --cached  // 查看本地代码与缓存区代码的不同
+
+6. git diff --staged  // 同上, 查看本地代码与缓存区代码的不同
+
+7. git stash save "comment" // 
+
+   - 当正在dev分支上开发某个项目，这时项目中出现一个bug，需要紧急修复，但是正在开发的内容只是完成一半，还不想提交，这时可以用git stash命令将修改的内容保存至堆栈区，然后顺利切换到hotfix分支进行bug修复，修复完成后，再次切回到dev分支，从堆栈中恢复刚刚保存的内容
+
+   - 总的来说，git stash命令的作用就是将目前还不想提交的但是已经修改的内容进行保存至堆栈中，后续可以在某个分支上恢复出堆栈中的内容。这也就是说，stash中的内容不仅仅可以恢复到原先开发的分支，也可以恢复到其他任意指定的分支上。git stash作用的范围包括工作区和暂存区中的内容，也就是说没有提交的内容都会保存至堆栈中。
+
+8. git stash list  // 查看stash了哪些存储
+
+9. git checkout .  // 放弃本地缓存,也就是add . 之后的东西
 
 
 
