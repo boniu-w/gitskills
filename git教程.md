@@ -125,16 +125,12 @@ git push -u origin master
 
 ### 如何解决failed to push some refs to git
 
-可以通过如下命令进行代码合并【注：pull=fetch+merge]
-git pull --rebase origin master
+1. 可以通过如下命令进行代码合并【注：pull=fetch+merge]
+   git pull --rebase origin master
 
+   在使用git的过程中经常需要使用到git pull命令，在更新远端代码的同时如果与本地代码产生冲突了，
 
-
-  在使用git的过程中经常需要使用到git pull命令，在更新远端代码的同时如果与本地代码产生冲突了，
-
-那么冲突的文件中就出现了需要手动合并的部分，而git pull --rebase不同的地方则是当有这些冲突存在时，
-
-git帮我们自动创建了一个新的分支，并且git告诉你接下来你要在这个新的分支上处理这个冲突，
+   那么冲突的文件中就出现了需要手动合并的部分，而git pull --rebase不同的地方则是当有这些冲突存在时，git帮我们自动创建了一个新的分支，并且git告诉你接下来你要在这个新的分支上处理这个冲突，
 
 ---
 
@@ -156,7 +152,7 @@ git checkout branchName
 
 git checkout -b newBranchName
 
-5. 拉取远程分支代码
+5. 切换分支
 
 git checkout remoteBranchName
 
@@ -227,10 +223,7 @@ git log
 
 ​	英文状态下按Q
 
-
-
-
-#### git 如果操作失误,错误的使用 git reset --hard 回滚
+### git 如果操作失误,错误的使用 git reset --hard 回滚
 
  使得工作目录改变了,可以使用git reflog,看到相应的快照,可以回滚回去.
 
@@ -288,29 +281,37 @@ git pull origin master
 
 ### git 各种命令解释
 
-1. git add .  // 缓存本地代码
-
-2. git commit -m "comment"  // 提交本地代码到本地仓库
-
-3. git push origin master  // 推送本地库的代码到远程库
-
-4. git diff  // 此命令比较的是工作目录(Working tree)和暂存区域快照(index)之间的差异
-
-   也就是修改之后还没有暂存起来的变化内容
-
-5. git diff --cached  // 查看本地代码与缓存区代码的不同
-
-6. git diff --staged  // 同上, 查看本地代码与缓存区代码的不同
-
-7. git stash save "comment" // 
+1. git stash save "comment 你的一些注释" // 
 
    - 当正在dev分支上开发某个项目，这时项目中出现一个bug，需要紧急修复，但是正在开发的内容只是完成一半，还不想提交，这时可以用git stash命令将修改的内容保存至堆栈区，然后顺利切换到hotfix分支进行bug修复，修复完成后，再次切回到dev分支，从堆栈中恢复刚刚保存的内容
 
    - 总的来说，git stash命令的作用就是将目前还不想提交的但是已经修改的内容进行保存至堆栈中，后续可以在某个分支上恢复出堆栈中的内容。这也就是说，stash中的内容不仅仅可以恢复到原先开发的分支，也可以恢复到其他任意指定的分支上。git stash作用的范围包括工作区和暂存区中的内容，也就是说没有提交的内容都会保存至堆栈中。
 
-8. git stash list  // 查看stash了哪些存储
+2. git stash list  // 查看stash了哪些存储
 
-9. git checkout .  // 放弃本地缓存,也就是add . 之后的东西
+3. git stash pop  // 取出stash的存储到当前的工作目录,并删除其他的stash,默认取第一个stash,即stash@{0}
+
+4. git add .  // 缓存本地代码
+
+5. git commit -m "comment"  // 提交本地代码到本地仓库
+
+6. git commit --amend  // 修改注释
+
+7. git push origin master  // 推送本地库的代码到远程库
+
+8. git diff  // 此命令比较的是工作目录(Working tree)和暂存区域快照(index)之间的差异
+
+   也就是修改之后还没有暂存起来的变化内容
+
+9. git diff --cached  // 查看本地代码与缓存区代码的不同
+
+10. git diff --staged  // 同上, 查看本地代码与缓存区代码的不同
+
+11. git checkout .  // 放弃本地缓存,也就是add . 之后的东西
+
+12. git fetch  // 将远程库的代码拉取到本地,但还没有融合到本地代码中,用户可以先检查一下拉取的代码是否有要修改的地方,再决定是否要融合;拉取之后 使用 git diff 可以看到不同,然后idea 也会显示冲突的地方,然后修改,之后 add. -> commit -> push
+
+13. git pull // 相当于 git fetch + git merge
 
 
 
