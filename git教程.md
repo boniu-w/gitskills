@@ -277,7 +277,26 @@ git pull origin master
     git checkout .  // 放弃本地缓存
     ```
 
-    
+
+
+
+### 保留本地修改的同时,拉取 合并远程代码
+
+```java
+	git stash save "comment 你的一些注释" 
+    git pull origin dev_wz
+    git stash pop
+```
+
+
+
+### git 修改分支名
+
+```java
+git branch -m 原名 新名
+```
+
+
 
 ### git 各种命令解释
 
