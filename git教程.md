@@ -192,15 +192,15 @@ git log
 
 回退到上上个版本
 
-  git reset -hard HEAD^^
+  git reset --hard HEAD^^
 
 回退到上100个版本
 
-  git reset -hard HEAD~100
+  git reset --hard HEAD~100
 
 回退到指定版本
 
-  git reset -hard b863671 
+  git reset --hard b863671 
 
   //  push 后
 
