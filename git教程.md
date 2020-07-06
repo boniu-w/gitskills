@@ -208,6 +208,18 @@ git log
 
 
 
+#### 回退单个文件
+
+```java
+git log 完整文件名
+git reset 版本号 完整文件名
+   
+```
+
+
+
+
+
 ## 项目关联多个 库
 ​	git remote add wg 仓库地址    // wg 对应 原来的origin 
 ​	
