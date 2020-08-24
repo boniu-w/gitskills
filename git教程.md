@@ -120,10 +120,9 @@ git push -u origin master
 9. 查看库中文件列表
        git ls-files
 
----------------------
-### 代码冲突
+#### 代码冲突
 
-### 如何解决failed to push some refs to git
+#### 如何解决failed to push some refs to git
 
 1. 可以通过如下命令进行代码合并【注：pull=fetch+merge]
    git pull --rebase origin master
@@ -132,9 +131,7 @@ git push -u origin master
 
    那么冲突的文件中就出现了需要手动合并的部分，而git pull --rebase不同的地方则是当有这些冲突存在时，git帮我们自动创建了一个新的分支，并且git告诉你接下来你要在这个新的分支上处理这个冲突，
 
----
-
-## 分支 等
+#### 分支 等
 
 1. 查看本地分支
 
@@ -164,7 +161,7 @@ git branch -d branchName
 
 git push origin -d branchName
 
-## 版本回退
+#### 版本回退
 
 git log
 
@@ -216,11 +213,8 @@ git reset 版本号 完整文件名
    
 ```
 
+#### 项目关联多个 库
 
-
-
-
-## 项目关联多个 库
 ​	git remote add wg 仓库地址    // wg 对应 原来的origin 
 ​	
 
@@ -229,13 +223,11 @@ git reset 版本号 完整文件名
 	提交时
 	git push wg master 
 
-
-
-### git log 之后退出
+#### git log 之后退出
 
 ​	英文状态下按Q
 
-### git 如果操作失误,错误的使用 git reset --hard 回滚
+#### git 如果操作失误,错误的使用 git reset --hard 回滚
 
  使得工作目录改变了,可以使用git reflog,看到相应的快照,可以回滚回去.
 
@@ -243,8 +235,8 @@ git reset 版本号 完整文件名
 git reset --hard 分支名  // 让本地代码与分支代码保持一致
 ```
 
+#### git 的一个bug
 
-### git 的一个bug
 ```java
 error: RPC failed; curl 18 transfer closed with outstanding read data remaining
 fatal: The remote end hung up unexpectedly
@@ -279,6 +271,14 @@ git pull origin master
 
 
 
+#### 查看单个文件的提交历史
+
+```java
+  git log  文件名(具体到文件详细路径)
+```
+
+
+
 #### git中Already up to date 问题
 
 - 这个问题的原因是当前分支的代码与master分支代码不同步
@@ -289,10 +289,7 @@ git pull origin master
     git checkout .  // 放弃本地缓存
     ```
 
-
-
-
-### 保留本地修改的同时,拉取 合并远程代码
+#### 保留本地修改的同时,拉取 合并远程代码
 
 ```java
 	git stash save "comment 你的一些注释" 
@@ -300,9 +297,7 @@ git pull origin master
     git stash pop
 ```
 
-
-
-### git 修改分支名
+#### git 修改分支名
 
 ```java
 git branch -m 原名 新名
@@ -326,7 +321,7 @@ git branch -m 原名 新名
 
 5. git commit -m "comment"  // 提交本地代码到本地仓库
 
-6. git commit --amend  // 修改注释
+6. git commit --amend  // 修改最后一次提交的注释
 
 7. git push origin master  // 推送本地库的代码到远程库
 
@@ -344,5 +339,27 @@ git branch -m 原名 新名
 
 13. git pull // 相当于 git fetch + git merge
 
+### git命令
 
+| 命令                                               | 解释                                               | 例子                            |
+| -------------------------------------------------- | -------------------------------------------------- | ------------------------------- |
+| git reflog show --date=iso 分支名                  | 查看分支的各种信息,有创建时间,在此分支上有过的操作 | git reflog show  --date=iso dev |
+| git branch -m 原名 新名                            | 修改分支名                                         |                                 |
+| git remote add wg 仓库地址                         | 关联多个库 wg 对应 原来的origin                    |                                 |
+| git remote -v                                      | 查看项目 关联的所有库                              |                                 |
+| git log 完整文件名<br/>git reset 版本号 完整文件名 | 回退单个文件                                       |                                 |
+| git reset --hard 版本号                            | 回退到指定版本                                     | git reset --hard b863671        |
+| git commit --amend                                 | 修改最后一次提交的注释                             |                                 |
+|                                                    |                                                    |                                 |
+|                                                    |                                                    |                                 |
+|                                                    |                                                    |                                 |
+|                                                    |                                                    |                                 |
+|                                                    |                                                    |                                 |
+|                                                    |                                                    |                                 |
+|                                                    |                                                    |                                 |
+|                                                    |                                                    |                                 |
+|                                                    |                                                    |                                 |
+|                                                    |                                                    |                                 |
+|                                                    |                                                    |                                 |
+|                                                    |                                                    |                                 |
 
