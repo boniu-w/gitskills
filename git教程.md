@@ -350,7 +350,7 @@ git branch -m 原名 新名
 | git log 完整文件名<br/>git reset 版本号 完整文件名 | 回退单个文件                                       |                                 |
 | git reset --hard 版本号                            | 回退到指定版本                                     | git reset --hard b863671        |
 | git commit --amend                                 | 修改最后一次提交的注释                             |                                 |
-|                                                    |                                                    |                                 |
+| git rebase -i head~2                               | 修改之前的某次注释                                 |                                 |
 |                                                    |                                                    |                                 |
 |                                                    |                                                    |                                 |
 |                                                    |                                                    |                                 |
