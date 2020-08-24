@@ -351,8 +351,8 @@ git branch -m 原名 新名
 | git reset --hard 版本号                            | 回退到指定版本                                     | git reset --hard b863671        |
 | git commit --amend                                 | 修改最后一次提交的注释                             |                                 |
 | git rebase -i head~2                               | 修改之前的某次注释                                 |                                 |
-|                                                    |                                                    |                                 |
-|                                                    |                                                    |                                 |
+| git log  文件名(具体cd到文件详细路径)              | 单个文件的提交历史                                 |                                 |
+| git diff 版本号1 版本号2 文件名                    | 比较两个版本之间的差别                             |                                 |
 |                                                    |                                                    |                                 |
 |                                                    |                                                    |                                 |
 |                                                    |                                                    |                                 |
