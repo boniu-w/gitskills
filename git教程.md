@@ -303,9 +303,7 @@ git pull origin master
 git branch -m 原名 新名
 ```
 
-
-
-### git 各种命令解释
+#### git 各种命令解释
 
 1. git stash save "comment 你的一些注释" // 
 
@@ -339,27 +337,31 @@ git branch -m 原名 新名
 
 13. git pull // 相当于 git fetch + git merge
 
-### git命令
+#### git命令
 
-| 命令                                               | 解释                                               | 例子                            |
-| -------------------------------------------------- | -------------------------------------------------- | ------------------------------- |
-| git reflog show --date=iso 分支名                  | 查看分支的各种信息,有创建时间,在此分支上有过的操作 | git reflog show  --date=iso dev |
-| git branch -m 原名 新名                            | 修改分支名                                         |                                 |
-| git remote add wg 仓库地址                         | 关联多个库 wg 对应 原来的origin                    |                                 |
-| git remote -v                                      | 查看项目 关联的所有库                              |                                 |
-| git log 完整文件名<br/>git reset 版本号 完整文件名 | 回退单个文件                                       |                                 |
-| git reset --hard 版本号                            | 回退到指定版本                                     | git reset --hard b863671        |
-| git commit --amend                                 | 修改最后一次提交的注释                             |                                 |
-| git rebase -i head~2                               | 修改之前的某次注释                                 |                                 |
-| git log  文件名(具体cd到文件详细路径)              | 单个文件的提交历史                                 |                                 |
-| git diff 版本号1 版本号2 文件名                    | 比较两个版本之间的差别                             |                                 |
-|                                                    |                                                    |                                 |
-|                                                    |                                                    |                                 |
-|                                                    |                                                    |                                 |
-|                                                    |                                                    |                                 |
-|                                                    |                                                    |                                 |
-|                                                    |                                                    |                                 |
-|                                                    |                                                    |                                 |
-|                                                    |                                                    |                                 |
-|                                                    |                                                    |                                 |
+| <span style="white-space: nowrap;">命令&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</span> | <span style="white-space: nowrap;">解释&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</span> | <span style="white-space: nowrap;">例子&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</span> |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| git reflog show --date=iso 分支名                            | 查看分支的各种信息,有创建时间,在此分支上有过的操作           | git reflog show  --date=iso dev                              |
+| git branch -m 原名 新名                                      | 修改分支名                                                   |                                                              |
+| git remote add wg 仓库地址                                   | 关联多个库 wg 对应 原来的origin<br>提交时 git push wg 分支名 | git remote add wg https://github.com/boniu-w/test.git <br> git push wg wg-tianjin       |
+| git remote -v                                                | 查看项目 关联的所有库                                        |                                                              |
+| git log 完整文件名<br>git reset 版本号 完整文件名            | 回退单个文件                                                 |                                                              |
+| git reset --hard 版本号                                      | 回退到指定版本                                               | git reset --hard b863671                                     |
+| git commit --amend                                           | 修改最后一次提交的注释,会进入vim编辑器                       |                                                              |
+| git rebase -i head~2                                         | 修改之前的某次注释, <br>1. 你想修改哪条注释 就把哪条注释前面的pick换成edit. 方法就是上面说的编辑方式：i---编辑，把pick换成edit---Esc---:wq.<br>2. 然后 git commit --amend<br>3. 修改注释, 保存退出后, git rebase --continue<br>4. 其实这个原理我的理解就是先版本回退到你想修改的某次版本，然后修改当前的commit注释，然后再回到本地最新的版本 |                                                              |
+| git log  文件名(具体cd到文件详细路径)                        | 单个文件的提交历史                                           |                                                              |
+| git diff 版本号1 版本号2 文件名                              | 比较两个版本之间的差别                                       |                                                              |
+|                                                              |                                                              |                                                              |
+|                                                              |                                                              |                                                              |
+|                                                              |                                                              |                                                              |
+|                                                              |                                                              |                                                              |
+|                                                              |                                                              |                                                              |
+|                                                              |                                                              |                                                              |
+|                                                              |                                                              |                                                              |
+|                                                              |                                                              |                                                              |
+|                                                              |                                                              |                                                              |
+
+
+
+
 
