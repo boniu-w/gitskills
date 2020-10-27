@@ -337,9 +337,96 @@ git branch -m 原名 新名
 
 13. git pull // 相当于 git fetch + git merge
 
+
+
+#### github 下载 速度 慢
+
+**方法一：**
+
+  **从GitHub下载文件一直非常慢，查看下载链接发现最终被指向了Amazon的服务器，下载地址是http://github-cloud.s3.amazonaws.com/，从国内访问Amazon非常慢，所以总是下载失败，解决方法时更改host文件，使该域名指向香港的服务器：**
+
+**更改hosts文件：**
+
+- Windows
+
+> 更改`C:\Windows\System32\drivers\etc\hosts`文件，在文件中追加`219.76.4.4 github-cloud.s3.amazonaws.com`, 将域名指向该IP即可
+
+- Mac
+
+> 执行 `sudo vi /etc/hosts` 追加 `219.76.4.4 github-cloud.s3.amazonaws.com`
+
+
+
+**最后执行**`**ipconfig /flushdns**`**命令，刷新 DNS 缓存。**
+
+**方法二：**
+
+​    **https://www.ipaddress.com/ \**使用 IP Lookup 工具获得下面这两个github域名的ip地址，该网站可能需要梯子，输入上述域名后，分别获得github.com和github.global.ssl.fastly.net对应的ip，比如192.30.xx.xx和151.101.xx.xx。准备工作做完之后，打开的hosts文件中添加如下格式，IP修改为自己查询到的IP：\**
+
+\**192.30.xx.xx github.com
+151.101.xx.xx github.global.ssl.fastly.net\**
+
+\**\*\*最后执行\*\*`\*\*ipconfig /flushdns\*\*`\*\*命令，刷新 DNS 缓存。\*\*修改后的下载速度能达到 200KB/S 以上。\*\*\*\*\****
+
+ **方法四：**
+
+​    **这个需要开启代理，有些人开启后发现下载速度还是上不去，因为GitHub没被qiang，只是限速了，所以没走代理。需要修改pac.txt文件。在pac里面添加一行规则。后面需要加\*。因为下载的网站不是github.com。而是涉及很多个github\**\**.com 后面忘记了，但是都是github打头的。使用下面的规则github才全部走代理。**
+
+```cpp
+  "||github*.com",
+```
+
+
+
+**方法五：**
+
+   **如果运行了SS（纸飞机）等代理工具，方法四只能用于加速网页浏览下载github仓库项目，但是如果你装了git或者sourcetree等其他git管理工具，使用方法四是无法走代理加速的。你需要设置自己的git才能使用代理。在C:\Users\用户名\.ssh 目录下config文件里，只有使用git生成过ssh密钥的才有此目录，没有config文件则新建一个，注意文件没有后缀。添加如下内容**
+
+```cpp
+Host github.com
+
+
+
+ProxyCommand connect -H 127.0.0.1:1080 %h %p   #-S为socks
+
+
+
+HostName %h
+
+
+
+Port 22
+
+
+
+User git
+
+
+
+IdentityFile  ~/.ssh/id_rsa 
+
+
+
+IdentitiesOnly yes
+```
+
+**下载connect.exe。放到git安装目录的bin目录下。**
+
+**下载地址：https://download.csdn.net/download/qing666888/11973853**
+
+**再次启动sourcetree进行SSH模式下clone 拉取代码，速度直接就上10M/S了，当然取决于你SSR的速度。**
+
+
+
+
+
+
+
+
+
 #### git命令
 
-| <span style="white-space: nowrap;">命令&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</span> | <span style="white-space: nowrap;">解释&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</span> | <span style="white-space: nowrap;">例子&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</span> |
+| <span style="white-space: nowrap;">命令&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</span> |<span style="white-space: nowrap;"> 解释&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; </span>| <span style="white-space: nowrap;">例子&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</span> |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | git reflog show --date=iso 分支名                            | 查看分支的各种信息,有创建时间,在此分支上有过的操作           | git reflog show  --date=iso dev                              |
 | git branch -m 原名 新名                                      | 修改分支名                                                   |                                                              |
@@ -360,6 +447,20 @@ git branch -m 原名 新名
 |                                                              |                                                              |                                                              |
 |                                                              |                                                              |                                                              |
 |                                                              |                                                              |                                                              |
+
+
+
+
+
+#### 各种问题
+
+1. git操作出现Unlink of file '......' failed. Should I try again?问题
+
+**解决办法：**
+
+> 解决方案不是简单的选择y或者n,而是关闭IDE，让IDE把这些文件释放掉
+>
+> 原因是工作目录有某些文件正在被程序使用，这个程序多半是Idea,VS或者eclipse,当然也可能是其他程序
 
 
 
