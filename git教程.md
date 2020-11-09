@@ -443,20 +443,21 @@ IdentitiesOnly yes
 
 #### git命令
 
-| <span style="white-space: nowrap;">命令&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</span> |<span style="white-space: nowrap;"> 解释&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; </span>| <span style="white-space: nowrap;">例子&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</span> |
+| <span style="white-space: nowrap;">命令&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</span> | <span style="white-space: nowrap;"> 解释&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; </span> | <span style="white-space: nowrap;">例子&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</span> |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | git reflog show --date=iso 分支名                            | 查看分支的各种信息,有创建时间,在此分支上有过的操作           | git reflog show  --date=iso dev                              |
+| git reflog                                                   | 查看当前分支的操作 日志                                      |                                                              |
 | git branch -m 原名 新名                                      | 修改分支名                                                   |                                                              |
-| git remote add wg 仓库地址                                   | 关联多个库 wg 对应 原来的origin<br>提交时 git push wg 分支名 | git remote add wg https://github.com/boniu-w/test.git <br> git push wg wg-tianjin       |
+| git remote add wg 仓库地址                                   | 关联多个库 wg 对应 原来的origin<br>提交时 git push wg 分支名 | git remote add wg https://github.com/boniu-w/test.git <br> git push wg wg-tianjin |
 | git remote -v                                                | 查看项目 关联的所有库                                        |                                                              |
 | git log 完整文件名<br>git reset 版本号 完整文件名            | 回退单个文件                                                 |                                                              |
 | git reset --hard 版本号                                      | 回退到指定版本                                               | git reset --hard b863671                                     |
 | git commit --amend                                           | 修改最后一次提交的注释,会进入vim编辑器                       |                                                              |
 | git rebase -i head~2                                         | 修改之前的某次注释, <br>1. 你想修改哪条注释 就把哪条注释前面的pick换成edit. 方法就是上面说的编辑方式：i---编辑，把pick换成edit---Esc---:wq.<br>2. 然后 git commit --amend<br>3. 修改注释, 保存退出后, git rebase --continue<br>4. 其实这个原理我的理解就是先版本回退到你想修改的某次版本，然后修改当前的commit注释，然后再回到本地最新的版本 |                                                              |
-| git log  文件名(具体cd到文件详细路径)                        | 单个文件的提交历史                                           |                                                              |
+| git log  文件名(具体到文件详细路径)                          | 单个文件的提交历史                                           |                                                              |
 | git diff 版本号1 版本号2 文件名                              | 比较两个版本之间的差别                                       |                                                              |
-|                                                              |                                                              |                                                              |
-|                                                              |                                                              |                                                              |
+| git revert -n 版本号                                         | 反做某个版本, 比如说想反做版本2, 又不影响版本10, 使用git revert -n  版本2, 然后修改 提交, 生成版本11, 但版本10 是不受影响的, 和 git reset --hard 版本号, 是有区别的 |                                                              |
+| git show 分支名                                              | 查看分支的 最新一次提交的完整信息                            |                                                              |
 |                                                              |                                                              |                                                              |
 |                                                              |                                                              |                                                              |
 |                                                              |                                                              |                                                              |
@@ -478,6 +479,87 @@ IdentitiesOnly yes
 > 解决方案不是简单的选择y或者n,而是关闭IDE，让IDE把这些文件释放掉
 >
 > 原因是工作目录有某些文件正在被程序使用，这个程序多半是Idea,VS或者eclipse,当然也可能是其他程序
+
+
+
+2. 使用git reset --hard 版本号 之后, 再 git log 发现之后的版本不见了
+
+解决:
+
+- 使用命令, 查看操作日志
+
+> git reflog
+
+
+
+```c++
+123@DESKTOP-O521OIN MINGW64 /d/ideaprojects/changsha/tientsineye (wg-0811)
+$ git reflog
+3296c73 (HEAD -> wg-0811) HEAD@{0}: reset: moving to 3296c7373f9eed0952361ce77bfdec0beee20509
+57ca8ec HEAD@{1}: reset: moving to HEAD^
+920a68e HEAD@{2}: reset: moving to HEAD
+920a68e HEAD@{3}: reset: moving to HEAD~3
+3296c73 (HEAD -> wg-0811) HEAD@{4}: reset: moving to HEAD
+3296c73 (HEAD -> wg-0811) HEAD@{5}: commit: modify: 修改token过期时间为24天, 修改端口号为 13545
+090c0eb HEAD@{6}: commit: modify: 版本在单点登录前 ac51aeea8b83a921f3935ee69dab6faf1406fbfc
+ac51aee HEAD@{7}: reset: moving to ac51aeea8b83a921f3935ee69dab6faf1406fbfc
+335111e HEAD@{8}: reset: moving to 335111e34edaafd283c87b8327ad476a32526033
+b53158f (origin/wg-0811) HEAD@{9}: commit: modify: 为了本地化, 修改dev 配置文件, 现在能够正常启动了
+67f1260 HEAD@{10}: checkout: moving from master to wg-0811
+30fc463 (master) HEAD@{11}: pull origin wg-0811 --allow-unrelated-histories: Merge made by the 'recursive' strategy.
+13f4a7e (origin/master, origin/HEAD) HEAD@{12}: clone: from ssh-git.yxkj-tj.com:tcc/tientsineye.git
+
+```
+
+
+
+- 使用 git show \<command id> 查看 commit 信息
+
+```c++
+123@DESKTOP-O521OIN MINGW64 /d/ideaprojects/changsha/tientsineye (wg-0811)
+$ git show 67f1260
+commit 67f12604f48252f9e54bed82bc2db8a9f627cdb9
+Author: boniu <boniu-w@live.cn>
+Date:   Fri Sep 25 17:05:17 2020 +0800
+
+    总体没啥问题了
+
+diff --git a/src/main/java/com/fybdp/tientsineye/controller/LoginController.java b/src/main/java/com/fybdp/tientsineye/controller/LoginController.java
+index 682c07a..4136b81 100644
+--- a/src/main/java/com/fybdp/tientsineye/controller/LoginController.java
++++ b/src/main/java/com/fybdp/tientsineye/controller/LoginController.java
+@@ -97,7 +97,7 @@ public class LoginController {
+         }
+         if(teuser!=null){
+             String realname = teuser.getRealName();
+-            String pcname = teuser.getPcNumber();
++            String pcNumber = teuser.getPcNumber();
+             String idcard_no = teuser.getIdcard_no();
+             String username = teuser.getUserName();
+             String depname = teuser.getDeptName();
+@@ -110,7 +110,7 @@ public class LoginController {
+             authTokenDetails.setPoliceName(idcard_no);
+             authTokenDetails.setDeptId(depcode);
+             authTokenDetails.setDeptName(depname);
+-            authTokenDetails.setOperatorId(userId);
++            authTokenDetails.setOperatorId(pcNumber);
+
+             List<String> aut = new ArrayList<String>();
+             aut.add("ADMIN");
+
+123@DESKTOP-O521OIN MINGW64 /d/ideaprojects/changsha/tientsineye (wg-0811)
+
+```
+
+
+
+- 再使用git reset --hard <版本号> 到想要的版本位置
+
+
+
+
+
+
 
 
 
