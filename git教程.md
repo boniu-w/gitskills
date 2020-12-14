@@ -458,8 +458,8 @@ IdentitiesOnly yes
 | git diff 版本号1 版本号2 文件名                              | 比较两个版本之间的差别                                       |                                                              |
 | git revert -n 版本号                                         | 反做某个版本, 比如说想反做版本2, 又不影响版本10, 使用git revert -n  版本2, 然后修改 提交, 生成版本11, 但版本10 是不受影响的, 和 git reset --hard 版本号, 是有区别的 |                                                              |
 | git show 分支名                                              | 查看分支的 最新一次提交的完整信息                            |                                                              |
-|                                                              |                                                              |                                                              |
-|                                                              |                                                              |                                                              |
+| git checkout branchName                                      | 切換分支                                                     |                                                              |
+| git config --system --list<br />git config --local --list<br />git config --global --list<br />git config --list | 查看配置                                                     |                                                              |
 |                                                              |                                                              |                                                              |
 |                                                              |                                                              |                                                              |
 |                                                              |                                                              |                                                              |
@@ -558,6 +558,22 @@ index 682c07a..4136b81 100644
 
 
 
+
+# gitignore
+
+
+
+```swift
+/mtk/ 过滤整个文件夹
+*.zip 过滤所有.zip文件
+/mtk/do.c 过滤某个具体文件
+```
+
+```swift
+!src/   不过滤该文件夹
+!*.zip   不过滤所有.zip文件
+!/mtk/do.c 不过滤该文件
+```
 
 
 
