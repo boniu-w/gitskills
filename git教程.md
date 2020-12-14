@@ -466,13 +466,8 @@ IdentitiesOnly yes
 | git config user.email                                        | 查看配置的user.email                                         |                                                              |
 | git config --global user.name 用户名                         | 全局配置 用户名,  修改时 也用这个命令, 修改当前项目的话 不用加 --global |                                                              |
 | git config --global user.email  邮箱名                       | 全局配置邮箱, 修改也用此命令                                 |                                                              |
-|                                                              |                                                              |                                                              |
-|                                                              |                                                              |                                                              |
-|                                                              |                                                              |                                                              |
-|                                                              |                                                              |                                                              |
-|                                                              |                                                              |                                                              |
-|                                                              |                                                              |                                                              |
-|                                                              |                                                              |                                                              |
+| git checkout branchName                                      | 切換分支                                                     |                                                              |
+| git config --system --list<br />git config --local --list<br />git config --global --list<br />git config --list | 查看配置                                                     |                                                              |
 |                                                              |                                                              |                                                              |
 |                                                              |                                                              |                                                              |
 |                                                              |                                                              |                                                              |
@@ -569,6 +564,22 @@ index 682c07a..4136b81 100644
 
 
 
+
+# gitignore
+
+
+
+```swift
+/mtk/ 过滤整个文件夹
+*.zip 过滤所有.zip文件
+/mtk/do.c 过滤某个具体文件
+```
+
+```swift
+!src/   不过滤该文件夹
+!*.zip   不过滤所有.zip文件
+!/mtk/do.c 不过滤该文件
+```
 
 
 
