@@ -458,6 +458,17 @@ IdentitiesOnly yes
 | git diff 版本号1 版本号2 文件名                              | 比较两个版本之间的差别                                       |                                                              |
 | git revert -n 版本号                                         | 反做某个版本, 比如说想反做版本2, 又不影响版本10, 使用git revert -n  版本2, 然后修改 提交, 生成版本11, 但版本10 是不受影响的, 和 git reset --hard 版本号, 是有区别的 |                                                              |
 | git show 分支名                                              | 查看分支的 最新一次提交的完整信息                            |                                                              |
+| git push origin --delete 分支名                              | 删除远程分支                                                 |                                                              |
+| git fetch                                                    | 将本地分支与远程同步                                         |                                                              |
+| git branch -r                                                | 查看远程分支                                                 |                                                              |
+| git log --pretty=oneline                                     | 提交历史                                                     |                                                              |
+| git config user.name                                         | 查看配置的user.name                                          |                                                              |
+| git config user.email                                        | 查看配置的user.email                                         |                                                              |
+| git config --global user.name 用户名                         | 全局配置 用户名,  修改时 也用这个命令, 修改当前项目的话 不用加 --global |                                                              |
+| git config --global user.email  邮箱名                       | 全局配置邮箱, 修改也用此命令                                 |                                                              |
+|                                                              |                                                              |                                                              |
+|                                                              |                                                              |                                                              |
+|                                                              |                                                              |                                                              |
 |                                                              |                                                              |                                                              |
 |                                                              |                                                              |                                                              |
 |                                                              |                                                              |                                                              |
@@ -482,7 +493,7 @@ IdentitiesOnly yes
 
 
 
-2. 使用git reset --hard 版本号 之后, 再 git log 发现之后的版本不见了
+2. 误 使用git reset --hard 版本号 之后, 再 git log 发现之后的版本不见了
 
 解决:
 
