@@ -450,7 +450,7 @@ IdentitiesOnly yes
 | git branch -m 原名 新名                                      | 修改分支名                                                   |                                                              |
 | git remote add wg 仓库地址                                   | 关联多个库 wg 对应 原来的origin<br>提交时 git push wg 分支名 | git remote add wg https://github.com/boniu-w/test.git <br> git push wg wg-tianjin |
 | git remote -v                                                | 查看项目 关联的所有库                                        |                                                              |
-| git checkout .                                               | 没add 前 放弃本地 修改的代码                                 |                                                              |
+| git checkout .                                               | 没add 前 放弃本地 所有修改的代码                             |                                                              |
 | git reset HEAD .                                             | add 后 , 放弃本地修改                                        |                                                              |
 | git log 完整文件名<br>git reset 版本号 完整文件名            | 回退单个文件                                                 |                                                              |
 | git reset --hard 版本号                                      | 回退到指定版本                                               | git reset --hard b863671                                     |
@@ -470,7 +470,7 @@ IdentitiesOnly yes
 | git config --global user.email  邮箱名                       | 全局配置邮箱, 修改也用此命令                                 |                                                              |
 | git checkout branchName                                      | 切換分支                                                     |                                                              |
 | git config --system --list<br />git config --local --list<br />git config --global --list<br />git config --list | 查看配置                                                     |                                                              |
-|                                                              |                                                              |                                                              |
+| git merge dev                                                | 融合分支, 先切换到master, 再融合                             |                                                              |
 |                                                              |                                                              |                                                              |
 |                                                              |                                                              |                                                              |
 
