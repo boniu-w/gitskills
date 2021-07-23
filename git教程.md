@@ -1,4 +1,5 @@
-### 项目地址
+
+
 https://github.com/boniu-w/gitskills
 
 ### 1. 在新電腦上生成ssh 私钥
@@ -169,7 +170,7 @@ git log
 
   ----------没有add ----------
 
-  git checkout .
+  git checkout .     更新到工作目录
   ---------- add 后----------
 
 放弃所有缓存
@@ -443,19 +444,20 @@ IdentitiesOnly yes
 
 #### git命令
 
-| <span style="white-space: nowrap;">命令&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</span> | <span style="white-space: nowrap;"> 解释&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; </span> | <span style="white-space: nowrap;">例子&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</span> |
+| <span style="white-space: nowrap; width:30%">命令&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</span> | <span style="white-space: nowrap;"> 解释&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; </span> | <span style="white-space: nowrap;">例子&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</span> |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | git reflog show --date=iso 分支名                            | 查看分支的各种信息,有创建时间,在此分支上有过的操作           | git reflog show  --date=iso dev                              |
 | git reflog                                                   | 查看当前分支的操作 日志                                      |                                                              |
 | git branch -m 原名 新名                                      | 修改分支名                                                   |                                                              |
 | git remote add wg 仓库地址                                   | 关联多个库 wg 对应 原来的origin<br>提交时 git push wg 分支名 | git remote add wg https://github.com/boniu-w/test.git <br> git push wg wg-tianjin |
 | git remote -v                                                | 查看项目 关联的所有库                                        |                                                              |
-| git checkout .                                               | 没add 前 放弃本地 所有修改的代码                             |                                                              |
+| git checkout .                                               | 1.没add 前 放弃本地 所有修改的代码<br />2. add后             |                                                              |
+| git checkout 具体文件名                                      | 更新到工作目录, git reset 文件后, 文件并没有立即更新, 有unstaged change after reset 这个信息,  然后使用这个命令, 把文件更新过来 | git reset 版本号 文件名<br />git checkout 文件名             |
 | git reset HEAD .                                             | add 后 , 放弃本地修改                                        |                                                              |
-| git log 完整文件名<br>git reset 版本号 完整文件名            | 回退单个文件                                                 |                                                              |
+| git log 完整文件名<br>git reset 版本号 完整文件              | 回退单个文件, 根据实际经验, 第二种好用                       | git add .<br />git stash<br />git reset 版本号 文件<br />第二种<br />git checkout 版本号 文件名 |
 | git reset --hard 版本号                                      | 回退到指定版本                                               | git reset --hard b863671                                     |
 | git commit --amend                                           | 修改最后一次提交的注释,会进入vim编辑器                       |                                                              |
-| git rebase -i head~2                                         | 修改之前的某次注释, <br>1. 你想修改哪条注释 就把哪条注释前面的pick换成edit. 方法就是上面说的编辑方式：i---编辑，把pick换成edit---Esc---:wq.<br>2. 然后 git commit --amend<br>3. 修改注释, 保存退出后, git rebase --continue<br>4. 其实这个原理我的理解就是先版本回退到你想修改的某次版本，然后修改当前的commit注释，然后再回到本地最新的版本 |                                                              |
+| git rebase -i head~2                                         | 修改之前的已经提交的某次注释, 数字2表示是倒数第几次<br>1. 你想修改哪条注释 就把哪条注释前面的pick换成edit. 方法就是上面说的编辑方式：i---编辑，把pick换成edit---Esc---:wq.<br>2. 然后 git commit --amend<br>3. 修改注释, 保存退出后, git rebase --continue<br>4. 其实这个原理我的理解就是先版本回退到你想修改的某次版本，然后修改当前的commit注释，然后再回到本地最新的版本 |                                                              |
 | git log  文件名(具体到文件详细路径)                          | 单个文件的提交历史                                           |                                                              |
 | git diff 版本号1 版本号2 文件名                              | 比较两个版本之间的差别                                       |                                                              |
 | git revert -n 版本号                                         | 反做某个版本, 比如说想反做版本2, 又不影响版本10, 使用git revert -n  版本2, 然后修改 提交, 生成版本11, 但版本10 是不受影响的, 和 git reset --hard 版本号, 是有区别的 |                                                              |
@@ -471,16 +473,22 @@ IdentitiesOnly yes
 | git checkout branchName                                      | 切換分支                                                     |                                                              |
 | git config --system --list<br />git config --local --list<br />git config --global --list<br />git config --list | 查看配置                                                     |                                                              |
 | git merge dev                                                | 融合分支, 先切换到master, 再融合                             |                                                              |
+| git remote rm origin                                         | 删除origin                                                   |                                                              |
+| git remote set-url origin newGitUrl                          | 直接修改库地址                                               |                                                              |
+| git config --global credential.helper store                  | 将用户名和密码长期全局地长期地存储在客户端(实际是客户端所在电脑，并非git的任何目录下，也就是说，即使重装git，改密码也存在) |                                                              |
+| git config --global credential.helper cache                  | 设置记住密码（默认15分钟）                                   |                                                              |
+| git config credential.helper 'cache --timeout=3600'          | 设置记住密码一个小时之后失效                                 |                                                              |
+|                                                              | 在用http形式关联库的时候, 把用户名和密码加上, 这样就不用每次输入密码了 | http://yourname:password@git.oschina.net/name/project.git    |
+| git log origin/master -n 3                                   | 查看远程库log                                                |                                                              |
 |                                                              |                                                              |                                                              |
 |                                                              |                                                              |                                                              |
+|                                                              |                                                              |                                                              |
+|                                                              |                                                              |                                                              |
+|                                                              |                                                              |                                                              |
 
+# 各种问题
 
-
-
-
-#### 各种问题
-
-1. git操作出现Unlink of file '......' failed. Should I try again?问题
+## 1. git操作出现Unlink of file '......' failed. Should I try again?问题
 
 **解决办法：**
 
@@ -490,7 +498,7 @@ IdentitiesOnly yes
 
 
 
-2. 误 使用git reset --hard 版本号 之后, 再 git log 发现之后的版本不见了
+## 2. 误 使用git reset --hard 版本号 之后, 再 git log 发现之后的版本不见了
 
 解决:
 
@@ -564,6 +572,22 @@ index 682c07a..4136b81 100644
 - 再使用git reset --hard <版本号> 到想要的版本位置
 
 
+
+## 3. gitee 403
+
+原因: **git 客户端缓存了错误的密码**
+
+先执行:  确认并添加主机SSH到可信列表
+
+```
+ssh -T git@gitee.com  
+```
+
+再: 
+
+要么 添加ssh公钥后, 使用ssh地址
+
+要么 修改缓存的密码
 
 
 
