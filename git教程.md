@@ -59,7 +59,7 @@ git push -u origin master
 		git add README.md
 		git commit -m "first commit"
 		git remote add origin https://github.com/boniu-w/gitProject.git
-		git push -u origin master
+		git push -u origin mastergit
 
 就可以了
 第三条 命令 再第一次执行过以后 就可以省略掉了 因为 在此文件夹下的.git文件中已保存了 地址
