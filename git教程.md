@@ -480,8 +480,8 @@ IdentitiesOnly yes
 | git config credential.helper 'cache --timeout=3600'          | 设置记住密码一个小时之后失效                                 |                                                              |
 |                                                              | 在用http形式关联库的时候, 把用户名和密码加上, 这样就不用每次输入密码了 | http://yourname:password@git.oschina.net/name/project.git    |
 | git log origin/master -n 3                                   | 查看远程库log                                                |                                                              |
-|                                                              |                                                              |                                                              |
-|                                                              |                                                              |                                                              |
+| git cherry -v                                                | 查看 已 commit 但 未 push 的                                 |                                                              |
+| git log --oneline -3                                         | 查看最近 3次 commit log                                      |                                                              |
 |                                                              |                                                              |                                                              |
 |                                                              |                                                              |                                                              |
 |                                                              |                                                              |                                                              |
