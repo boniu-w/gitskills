@@ -482,7 +482,7 @@ IdentitiesOnly yes
 | git log origin/master -n 3                                   | 查看远程库log                                                |                                                              |
 | git cherry -v                                                | 查看 已 commit 但 未 push 的                                 |                                                              |
 | git log --oneline -3                                         | 查看最近 3次 commit log                                      |                                                              |
-|                                                              |                                                              |                                                              |
+| git config --global core.quotepath false                     | 解决 git status 时, 文件乱码的问题                           |                                                              |
 |                                                              |                                                              |                                                              |
 |                                                              |                                                              |                                                              |
 
@@ -609,7 +609,34 @@ ssh -T git@gitee.com
 
 
 
+# 合并分支时, 忽略某些文件
+
+1. git config --global merge.ours.driver true
+2. 
 
 
 
+# git config
 
+1. ```text
+   git config --global core.quotepath false
+   ```
+
+   解决 git status 时, 文件乱码的问题
+
+   ![img](.\img\git status.png)
+
+
+
+# 除了某个文件外, 其他的都提交, 
+
+1. git add .
+
+   ![img](./img/git add.png)
+
+2. git  restore --staged <file>... 
+
+   ![](./img/git restore.png)
+
+3. git commit -m ""
+4. git push
