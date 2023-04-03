@@ -482,8 +482,8 @@ IdentitiesOnly yes
 | git cherry -v                                                | 查看 已 commit 但 未 push 的                                 |                                                              |
 | git log --oneline -3                                         | 查看最近 3次 commit log                                      |                                                              |
 | git config --global core.quotepath false                     | 解决 git status 时, 文件乱码的问题                           |                                                              |
-|                                                              |                                                              |                                                              |
-|                                                              |                                                              |                                                              |
+| git  add  -f 文件名                                          | 强制提交某文件, 即使此类型文件已被忽略                       |                                                              |
+| git  rm --cached  文件名                                     | 从 Git 的缓存中删除要忽略的文件，以便它们不会在以后的提交中被包含。 |                                                              |
 
 # 一. 各种问题
 
@@ -604,6 +604,14 @@ ssh -T git@gitee.com
 
 
 
+## 5.  The following untracked working tree files would be overwritten by merge:         .DS_Store
+
+```
+git clean -d -fx .DS_Store
+```
+
+
+
 
 
 # 二. gitignore
@@ -643,7 +651,10 @@ ssh -T git@gitee.com
 
 git rm -r --cached target
 git rm -r --cached .idea
-此后不再追踪track这两个文件夹
+此后不再追踪 target .idea  这两个文件夹
+
+#  The following untracked working tree files would be overwritten by merge:         .DS_Store
+git clean -d -fx .DS_Store
 ```
 
 2. 
