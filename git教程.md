@@ -454,6 +454,8 @@ IdentitiesOnly yes
 | git remote rm origin                                         | 删除 origin                                                  |                                                              |
 | git remote set-url origin newGitUrl                          | 直接修改库地址                                               |                                                              |
 | git checkout .                                               | 1.没add 前 放弃本地 所有修改的代码<br />2. add后             |                                                              |
+| git checkout <commit-hash>                                   | 切换到特定的版本                                             |                                                              |
+| git checkout master                                          | 切换到最新版本                                               |                                                              |
 | git checkout 具体文件名                                      | 更新到工作目录, git reset 文件后, 文件并没有立即更新, 有unstaged change after reset 这个信息,  然后使用这个命令, 把文件更新过来 | git reset 版本号 文件名<br />git checkout 文件名             |
 | git reset HEAD .                                             | add 后 , 放弃本地修改                                        |                                                              |
 | git log 完整文件名<br>git reset 版本号 完整文件              | 回退单个文件, 根据实际经验, 第二种好用                       | git add .<br />git stash<br />git reset 版本号 文件<br />第二种<br />git checkout 版本号 文件名 |
@@ -488,9 +490,9 @@ IdentitiesOnly yes
 | git log --oneline -3                                         | 查看最近 3次 commit log                                      |                                                              |
 | git config --global core.quotepath false                     | 解决 git status 时, 文件乱码的问题                           |                                                              |
 | git  add  -f 文件名                                          | 强制提交某文件, 即使此类型文件已被忽略                       |                                                              |
-| git  rm --cached  文件名                                     | 从 Git 的缓存中删除要忽略的文件，以便它们不会在以后的提交中被包含。 |                                                              |
+| git  rm -r  --cached  文件名                                 | 从 Git 的缓存中删除要忽略的文件，以便它们不会在以后的提交中被包含。 |                                                              |
 
-# 一. 各种问题
+# 壹. 各种问题
 
 ## 1. git操作出现Unlink of file '......' failed. Should I try again?问题
 
@@ -619,7 +621,7 @@ git clean -d -fx .DS_Store
 
 
 
-# 二. gitignore
+# 贰. gitignore
 
 
 
@@ -664,14 +666,14 @@ git clean -d -fx .DS_Store
 
 2. 
 
-# 三. 合并分支时, 忽略某些文件
+# 叁. 合并分支时, 忽略某些文件
 
 1. git config --global merge.ours.driver true
 2. 
 
 
 
-# 四. git config
+# 肆. git config
 
 1. ```text
    git config --global core.quotepath false
@@ -683,7 +685,7 @@ git clean -d -fx .DS_Store
 
 
 
-# 五. 除了某个文件外, 其他的都提交, 
+# 伍. 除了某个文件外, 其他的都提交, 
 
 1. git add .
 
@@ -697,7 +699,7 @@ git clean -d -fx .DS_Store
 
 4. git push
 
-# 六. git log
+# 陆. git log
 
 1. git log
 
@@ -730,7 +732,7 @@ git clean -d -fx .DS_Store
 
 
 
-# 七. 删除远程 某次提交的代码
+# 柒. 删除远程 某次提交的代码
 
 1. 先与远程库一致, 
 
@@ -750,4 +752,52 @@ git clean -d -fx .DS_Store
    git push gitee master -f
    ```
 
-   
+
+
+
+# 捌. git submodule
+
+1. 新建 .gitmodules 文件
+
+2. 添加内容
+
+   ```
+   [submodule "java-study"]
+   	path = java-study
+   	url = git@gitee.com:boniu-w/java-study.git
+   [submodule "oldversion-05242023"]
+   	path = oldversion-05242023
+   	url = git@gitee.com:boniu-w/test.git
+   ```
+
+3. 新建文件夹 oldversion-05242023
+
+4. 按照 .gitmodules文件的内容 clone 项目 git clone git@gitee.com:boniu-w/test.git
+
+
+
+
+
+命令解释
+
+```
+git submodule init
+git submodule update
+
+在 Git 中，子模块（submodule）是指一个仓库中包含另一个完整的 Git 仓库。当主仓库需要引用其他项目的代码时，就可以使用子模块来实现。
+
+在添加了子模块后，要克隆包含子模块的仓库，需要执行两个命令：`git submodule init` 和 `git submodule update`，它们的作用分别是：
+
+`git submodule init` 该命令用于初始化仓库中的子模块。它会根据当前 `.gitmodules` 文件中的信息，在本地文件系统上创建对应的子模块目录，并在本地 Git 数据库中记录子模块的 SHA-1 值。
+
+`git submodule update` 该命令首先更新子模块配置信息，然后尝试从远程仓库拉取最新的代码。如果没有指定要更新哪个子模块，则会默认更新所有子模块。这个命令也会自动切换到子模块所属的分支。
+
+需要注意的是，如果子模块在远程仓库发生了更新，需要使用 `git submodule update` 命令来同步更新本地子模块。同时，还需要及时将子模块的变更提交到其所属的仓库，才能保证该子模块在主仓库中工作。
+
+以上是 `git submodule init` 和 `git submodule update` 命令的基本说明。在实际使用中，请根据具体情况进行调整和处理。
+```
+
+
+
+
+
