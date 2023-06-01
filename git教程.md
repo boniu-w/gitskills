@@ -774,6 +774,30 @@ git clean -d -fx .DS_Store
 
 4. 按照 .gitmodules文件的内容 clone 项目 git clone git@gitee.com:boniu-w/test.git
 
+5. 删除
+
+   ```
+   要删除 Git 仓库中的子模块，可以按照以下步骤操作：
+   
+   在命令行中进入主仓库目录。
+   
+   运行以下两个命令分别从 Git 仓库中移除子模块和删除已经存在的子模块文件夹：
+   
+   git submodule deinit -f [submodule_path]
+   git rm -f [submodule_path]
+   其中 [submodule_path] 是指要删除的子模块仓库相对于主仓库的路径。如 ./oldversion
+   
+   提交改动并删除子模块引用：
+   
+   git commit -m "Remove submodule"
+   rm -rf .git/modules/[submodule_path]
+   此时，主仓库中的子模块就已经被完全删除了。注意要同时执行上述两个命令，否则 Git 仍然会保留子模块的元数据。
+   
+   以上是删除 Git 子模块的基本方法，请根据实际情况进行调整和处理。
+   ```
+
+   
+
 
 
 
