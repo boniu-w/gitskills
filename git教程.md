@@ -457,6 +457,7 @@ IdentitiesOnly yes
 | git checkout <commit-hash>                                   | 切换到特定的版本                                             |                                                              |
 | git checkout master                                          | 切换到最新版本                                               |                                                              |
 | git checkout 具体文件名                                      | 更新到工作目录, git reset 文件后, 文件并没有立即更新, 有unstaged change after reset 这个信息,  然后使用这个命令, 把文件更新过来 | git reset 版本号 文件名<br />git checkout 文件名             |
+| git clean  -f  -d                                            | 删除 unversioned files                                       |                                                              |
 | git reset HEAD .                                             | add 后 , 放弃本地修改                                        |                                                              |
 | git log 完整文件名<br>git reset 版本号 完整文件              | 回退单个文件, 根据实际经验, 第二种好用                       | git add .<br />git stash<br />git reset 版本号 文件<br />第二种<br />git checkout 版本号 文件名 |
 | git log --pretty='%aN' &#124; sort &#124; uniq -c &#124; sort -k1 -n -r | 分组查询所有成员的提交次数                                   |                                                              |
@@ -473,6 +474,7 @@ IdentitiesOnly yes
 | git show 分支名                                              | 查看分支的 最新一次提交的完整信息                            |                                                              |
 | git push origin --delete 分支名                              | 删除远程分支                                                 |                                                              |
 | git fetch                                                    | 将本地分支与远程同步                                         |                                                              |
+| git pull origin master --allow-unrelated-histories           | Git 会默认拒绝合并没有共同祖先的两棵树。如果您确实需要将两个不相关的 Git 仓库合并到一起，则可以使用`--allow-unrelated-histories`选项来强制执行合并操作 |                                                              |
 | git branch -r                                                | 查看远程分支                                                 |                                                              |
 | git log --pretty=oneline                                     | 提交历史                                                     |                                                              |
 | git config user.name                                         | 查看配置的user.name                                          |                                                              |
@@ -615,6 +617,24 @@ ssh -T git@gitee.com
 
 ```
 git clean -d -fx .DS_Store
+```
+
+
+
+## 6. fatal: refusing to merge unrelated histories
+
+```
+这个错误通常出现在合并两个不相关的 Git 仓库的历史记录时，也有可能是因为在本地仓库中新建了一个分支而没有指定父提交。
+
+Git 会默认拒绝合并没有共同祖先的两棵树。如果您确实需要将两个不相关的 Git 仓库合并到一起，则可以使用--allow-unrelated-histories选项来强制执行合并操作。例如：
+
+git pull origin master --allow-unrelated-histories
+请注意，在执行此操作前，请确保您已经备份了所有数据，并牢记这将对您的仓库历史记录产生重大影响。
+
+如果您只是新建了一个本地分支而没有指定父提交，可以在创建分支时指定父提交，例如：
+
+git branch new-branch-name <commit>
+其中 <commit> 是指定的父提交的 SHA-1 值或分支名称。
 ```
 
 
@@ -783,8 +803,8 @@ git clean -d -fx .DS_Store
    
    运行以下两个命令分别从 Git 仓库中移除子模块和删除已经存在的子模块文件夹：
    
-   git submodule deinit -f [submodule_path]
-   git rm -f [submodule_path]
+   git submodule deinit -f [submodule_path] // 会清空 文件夹
+   git rm -f [submodule_path] // 删除文件夹
    其中 [submodule_path] 是指要删除的子模块仓库相对于主仓库的路径。如 ./oldversion
    
    提交改动并删除子模块引用：
@@ -824,4 +844,16 @@ git submodule update
 
 
 
+
+# 玖. 在master分支上, 融合wg分支时, 指定只融合wg分支上的 ga.txt 文件
+
+
+
+```
+git checkout master
+
+git checkout wg -- ga.txt
+
+git commit -m "
+```
 
