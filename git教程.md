@@ -493,6 +493,12 @@ IdentitiesOnly yes
 | git config --global core.quotepath false                     | 解决 git status 时, 文件乱码的问题                           |                                                              |
 | git  add  -f 文件名                                          | 强制提交某文件, 即使此类型文件已被忽略                       |                                                              |
 | git  rm -r  --cached  文件名                                 | 从 Git 的缓存中删除要忽略的文件，以便它们不会在以后的提交中被包含。 |                                                              |
+| git config --global core.autocrlf true                       | Git可以在你提交时自动地把行结束符CRLF转换成LF，而在签出代码时把LF转换成CRLF。用`core.autocrlf`来打开此项功能， 如果是在Windows系统上，把它设置成`true`（默认配置），这样当签出代码时，LF会被转换成CRLF |                                                              |
+| git config --global core.autocrlf input                      | linux                                                        |                                                              |
+
+
+
+
 
 # 壹. 各种问题
 
@@ -857,3 +863,28 @@ git checkout wg -- ga.txt
 git commit -m "
 ```
 
+
+
+# 拾. git config --global core.autocrlf
+
+`git config --global core.autocrlf` 是 Git 中的一个全局配置选项，用于控制如何处理文本文件中的行结束符（Line endings）。在不同的操作系统中，文本文件的行尾有不同的表示方式：
+
+- **Unix/Linux** 使用 LF（Line Feed，`\n`）作为行结束符。
+- **Windows** 使用 CRLF（Carriage Return + Line Feed，`\r\n`）作为行结束符。
+
+`core.autocrlf` 设置有三个主要的可能值：
+
+1. `true`：
+   - 当设置为 `true` 时，Git 在提交（commit）时会将所有的文本文件转换为使用 LF 作为行结束符。
+   - 在检出（checkout）或克隆（clone）项目时，Git 会将所有文本文件转换为使用 CRLF 行结束符，以适应 Windows 系统。
+   - 这个设置对于跨平台协作且大部分开发人员使用 Windows 操作系统的项目较为有用，因为它确保了在版本库中存储的是统一的 LF 结束符，同时在每个人的本地环境中显示为适合操作系统的行结束符。
+2. `input`：
+   - 设置为 `input` 时，Git 在提交时依然会将 CRLF 转换为 LF 存储在版本库中。
+   - 但在检出文件时，Git 不会自动将 LF 转换为 CRLF，而是保持文件原有的 LF 结束符不变。
+   - 这种设置适用于跨平台项目，并且期望开发者各自处理自己的文本编辑器或构建工具来正确显示行结束符，或者系统已经配置成能够正确显示 LF 结束符的情况。
+3. `false`：
+   - 设置为 `false` 时，Git 不进行任何自动的行结束符转换。
+   - 提交和检出时，文件内容完全按原样对待，这意味着如果你在 Windows 上创建了一个包含 CRLF 的文件并提交，那么其他用户在检出时也会得到 CRLF。
+   - 如果团队成员都是在同一平台上工作，或者所有文件都遵循统一的行结束符规范，这个设置可以避免不必要的转换。
+
+总结起来，对于跨平台开发，推荐大多数开发者使用 `core.autocrlf=input`，这样既可以保证仓库中的文件具有标准的 LF 结束符，又不会在检出时自动转换成 CRLF，除非开发者的环境需要这样做。如果只在一个平台上工作，且不需要自动转换，可以设置为 `false`。
