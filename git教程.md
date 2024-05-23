@@ -12,37 +12,28 @@ ls -al ~/.ssh
 
 ssh-keygen -t rsa -C "boniu-w@live.cn"  # 按三次回车
 
-cat ~/.ssh/id_rsa.pub生成新的SSH
-登陆github,点击头像-settings-new SSH,复制新生成的SSH
-
-echo "# gitProject" >> README.md
-git init
-
- // 添加所有更改 或某个更改
-git  add .    
-git add README.md         
-
-git commit -m "first commit"
+## 2. 添加所有更改 或某个更改
 
 git remote add origin https://github.com/boniu-w/gitProject.git       #给git仓库 提供远程地址 关联远程库
 
-git push -u origin master
+git  add .    #添加所有到缓冲区
+git add README.md         #只添加README.md文件到缓冲区
+
+git commit -m "first commit"     #为这次提交添加说明
+
+git push -u origin master #向远程库推送代码
+
+
+
+## 3. 安装完git后, 进行全局设置
 
 1. 安装完成后 进一步设置
      git config --global user.name "Your Name"
      git config --global user.email "email@example.com"
-     之后,在一个空的文件夹下输入
-     git init
-     会生成一个.git 的文件 表示这个文件夹 是一个 git可以管理的本地库
 
 2. 要关联一个远程库，使用命令
 
->   git remote add origin git@server-name:path/repo-name.git；
-
-
-关联后，使用命令
-
-> git push -u origin master
+>   git remote add  远程库标识({origin ,server ,gitee})   远程库地址
 
 第一次推送master分支的所有内容；
 此后，每次本地提交后，只要有必要，就可以使用命令git push origin master推送最新修改；
@@ -56,13 +47,15 @@ git push -u origin master
 提交一个项目到GitHub
 比如在gitskills文件夹下 这是我在GitHub上clone的repository,cd到这个文件夹下,右键打开bash,出现命令
 窗口,执行git语句
-		git add README.md
-		git commit -m "first commit"
-		git remote add origin https://github.com/boniu-w/gitProject.git
-		git push -u origin mastergit
+
+	> git remote add origin https://github.com/boniu-w/gitProject.git
+	>
+	> git add README.md
+	> git commit -m "first commit"	
+	> git push -u origin mastergit
 
 就可以了
-第三条 命令 再第一次执行过以后 就可以省略掉了 因为 在此文件夹下的.git文件中已保存了 地址
+git remote add origin https://github.com/boniu-w/gitProject.git 这个命令 在第一次执行过以后 就可以省略掉了 因为 在此文件夹下的.git文件中已保存了 地址
 第四条命令中的 -u 也可以省略掉了
 
 4. git log --pretty=online
@@ -73,7 +66,7 @@ git push -u origin master
      git branch dev
      git checkout dev
      查看当前分支,git branch命令会列出所有分支，当前分支前面会标一个*号
-     git branch
+     
      然后，我们就可以在dev分支上正常提交
      git add test1.txt 
      git commit -m "branch test"
