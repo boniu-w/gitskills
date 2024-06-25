@@ -442,6 +442,7 @@ IdentitiesOnly yes
 | git reflog show --date=iso 分支名                            | 查看分支的各种信息,有创建时间,在此分支上有过的操作           | git reflog show  --date=iso dev                              |
 | git reflog                                                   | 查看当前分支的操作 日志                                      |                                                              |
 | git branch -m 原名 新名                                      | 修改分支名                                                   |                                                              |
+| git branch -D 分支名                                         | 删除分支                                                     |                                                              |
 | git remote add wg 仓库地址                                   | 关联多个库 wg 对应 原来的origin<br>提交时 git push wg 分支名 | git remote add wg https://github.com/boniu-w/test.git <br> git push wg wg-tianjin |
 | git remote -v                                                | 查看项目 关联的所有库                                        |                                                              |
 | git remote rm origin                                         | 删除 origin                                                  |                                                              |
