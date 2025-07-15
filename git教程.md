@@ -157,55 +157,104 @@ git push origin -d branchName
 
 #### 版本回退
 
-git log
+ 一、**撤回尚未提交的修改（工作区 => 暂存区前）**
 
-  // push 之前
+如果你还没有执行 `git add`，只是改了文件，可以用以下命令撤回：
 
-  ----------没有add ----------
-
-  git checkout .     更新到工作目录
-  ---------- add 后----------
-
-放弃所有缓存
-
-  git reset HEAD .
-
-放弃某个 文件
-
-  git reset HEAD filepathname 
-
-
-  ----------commit 后----------
-
-回退到上个版本
-
-  git reset --hard HEAD^
-
-回退到上上个版本
-
-  git reset --hard HEAD^^
-
-回退到上100个版本
-
-  git reset --hard HEAD~100
-
-回退到指定版本
-
-  git reset --hard b863671 
-
-  //  push 后
-
-  git revert
-
-
-
-#### 回退单个文件
-
-```java
-git log 完整文件名
-git reset 版本号 完整文件名
-   
 ```
+bash
+
+
+复制编辑
+git checkout -- 文件名
+```
+
+比如：
+
+```
+bash
+
+
+复制编辑
+git checkout -- src/Main.java
+```
+
+这个操作会把文件还原成最新一次提交的内容（即 `HEAD` 里的版本），相当于放弃了本地修改。
+
+------
+
+ 二、**撤回已 git add 但未提交的修改（暂存区）**
+
+如果你已经用 `git add` 添加到了暂存区，但还没提交，可以这样撤回：
+
+```
+bash
+
+
+复制编辑
+git reset HEAD 文件名
+```
+
+这会把文件从**暂存区**移回工作区（不影响文件内容），然后你可以再用上面提到的 `git checkout -- 文件名` 放弃工作区的修改。
+
+------
+
+ 三、**撤回已经提交的某个文件的修改**
+
+如果你已经提交了，想撤回某个文件，可以用：
+
+```
+bash
+
+
+复制编辑
+git checkout 上一个提交ID -- 文件名
+```
+
+比如：
+
+```
+bash
+
+
+复制编辑
+git checkout HEAD^ -- src/Main.java
+```
+
+然后你再用：
+
+```
+bash
+
+
+复制编辑
+git commit -am "撤回某个文件"
+```
+
+也可以用 `git revert` 或 `git restore`，更现代一点的写法见下面补充。
+
+------
+
+ 四、**用 Git 2.23+ 的 git restore（推荐新项目使用）**
+
+```
+bash
+
+
+复制编辑
+# 撤回工作区对某文件的修改
+git restore 文件名
+
+# 撤回已添加到暂存区的文件
+git restore --staged 文件名
+
+# 同时撤回工作区和暂存区的文件
+git restore --staged --worktree 文件名
+```
+
+------
+
+
 
 #### 项目关联多个 库
 
@@ -493,9 +542,19 @@ IdentitiesOnly yes
 | git stash list                                               | 查看暂存区                                                   |                                                              |
 | git stash pop                                                | 恢复暂存, 这会恢复最近暂存的更改并删除对应的 stash（`pop` = 恢复 + 删除）。 |                                                              |
 | git stash apply                                              | 如果只想恢复但不删除 stash，可以用这个                       |                                                              |
-| git stash apply[pop] stash@{n}                               | 恢复指定的stash, 其中 `n` 是 `git stash list` 中显示的序号（比如 `stash@{1}`） |                                                              |
+| git stash apply[pop] stash@{n}                               | 恢复指定的stash, 其中 `n` 是 `git stash list` 中显示的序号（比如 `stash@{1}`） , [pop] 可不写 |                                                              |
 | git stash drop stash@{n}                                     | 删除某个 stash                                               |                                                              |
 | git stash clear                                              | 删除所有 stash                                               |                                                              |
+
+
+
+git stash 暂存特定文件
+
+```tex
+git stash push -m "保存icda" -- ./ceet-ufps-pl-pia-svc/src/main/java/ceet/ufps/pl/pia/pia/service/HistoryAssessmentSpIcdaService.java \
+./ceet-ufps-pl-pia-svc/src/main/java/ceet/ufps/pl/pia/pia/service/impl/HistoryAssessmentSpIcdaServiceImpl.java \
+./ceet-ufps-pl-pia-svc/src/main/java/ceet/ufps/pl/pia/pia/controller/HistoryAssessmentSpIcdaController.java
+```
 
 
 
