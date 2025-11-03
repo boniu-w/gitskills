@@ -545,6 +545,7 @@ IdentitiesOnly yes
 | git stash apply[pop] stash@{n}                               | 恢复指定的stash, 其中 `n` 是 `git stash list` 中显示的序号（比如 `stash@{1}`） , [pop] 可不写 |                                                              |
 | git stash drop stash@{n}                                     | 删除某个 stash                                               |                                                              |
 | git stash clear                                              | 删除所有 stash                                               |                                                              |
+| git clone -b 分支名  仓库地址                                | clone时关联分支                                              |                                                              |
 
 
 
