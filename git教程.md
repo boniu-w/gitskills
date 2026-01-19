@@ -546,6 +546,10 @@ IdentitiesOnly yes
 | git stash drop stash@{n}                                     | 删除某个 stash                                               |                                                              |
 | git stash clear                                              | 删除所有 stash                                               |                                                              |
 | git clone -b 分支名  仓库地址                                | clone时关联分支                                              |                                                              |
+| git clone --depth {n} clone 地址                             | 浅clone, 适用于:不需要完整的提交历史, 只要当前代码           | {n} 表示只需要最近n次的提交, n=1                             |
+| git clone --shallow-since="2024-01-01" <远程仓库URL>         | 仅获取该日期之后的提交历史                                   |                                                              |
+| git clone --depth 1 --shallow-branch=dev <远程仓库URL>       | 默认浅克隆会获取默认分支（通常是 main/master），如需指定分支的浅历史，可搭配该参数 |                                                              |
+| git fetch --unshallow                                        | 拉取所有完整的历史提交，转换为完整仓库                       |                                                              |
 
 
 
@@ -1102,3 +1106,15 @@ A -- B -- C (origin/master)
    ```
 
 注意：强制推送可能会影响其他协作者的工作，请谨慎操作
+
+
+
+# 13. git 我想 查看过去某次提交的 内容, 之后 确认无误后, 将当前内容强行改为 过去的某此提交, 不确认的话, 回到当前状态
+
+```bash
+git log
+git checkout <commit-hash>
+不确认 git checkout 分支名
+确认 git reset --hard <commit-hash>
+```
+
