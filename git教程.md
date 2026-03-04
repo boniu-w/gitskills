@@ -550,6 +550,9 @@ IdentitiesOnly yes
 | git clone --shallow-since="2024-01-01" <远程仓库URL>         | 仅获取该日期之后的提交历史                                   |                                                              |
 | git clone --depth 1 --shallow-branch=dev <远程仓库URL>       | 默认浅克隆会获取默认分支（通常是 main/master），如需指定分支的浅历史，可搭配该参数 |                                                              |
 | git fetch --unshallow                                        | 拉取所有完整的历史提交，转换为完整仓库                       |                                                              |
+| git config --global url."https://github.com/".insteadOf "git@github.com:" | 全局配置 替换 ssh 为 https                                   |                                                              |
+| git config --global --unset url."https://github.com/".insteadOf | 取消全局配置                                                 |                                                              |
+|                                                              |                                                              |                                                              |
 
 
 
