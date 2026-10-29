@@ -553,15 +553,34 @@ IdentitiesOnly yes
 | git config --global url."https://github.com/".insteadOf "git@github.com:" | 全局配置 替换 ssh 为 https                                   |                                                              |
 | git config --global --unset url."https://github.com/".insteadOf | 取消全局配置                                                 |                                                              |
 | git config --global --add safe.directory D:/java-project/sevenme/v7158-neijiance/ceet-ufps-pl-pia | 將文件夾加入白名單                                           |                                                              |
+| git merge --no-commit --no-ff wgtest                         | 合并但不自动提交（允许有冲突，先处理其他冲突）               |                                                              |
+| git merge --abort                                            | 执行完上面的命令后, 后悔了, merge 还没生成提交, 撤销merge    |                                                              |
 
 
 
 git stash 暂存特定文件
 
-```tex
+```sh
 git stash push -m "保存icda" -- ./ceet-ufps-pl-pia-svc/src/main/java/ceet/ufps/pl/pia/pia/service/HistoryAssessmentSpIcdaService.java \
 ./ceet-ufps-pl-pia-svc/src/main/java/ceet/ufps/pl/pia/pia/service/impl/HistoryAssessmentSpIcdaServiceImpl.java \
 ./ceet-ufps-pl-pia-svc/src/main/java/ceet/ufps/pl/pia/pia/controller/HistoryAssessmentSpIcdaController.java
+```
+
+
+
+融合分支, 但忽略某个文件夹
+
+```sh
+git checkout develop
+
+# 合并但不自动提交（允许有冲突，先处理其他冲突）
+git merge --no-commit --no-ff test
+
+# 把目标文件夹强制恢复为 develop（当前 HEAD）的版本
+git restore --source=HEAD --staged --worktree -- 要忽略的文件夹/
+
+# 确认其他文件都符合预期后提交
+git commit
 ```
 
 
